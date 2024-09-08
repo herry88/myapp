@@ -61,7 +61,7 @@ class _AddPageState extends State<AddPage> {
             fontSize: 20,
           ),
         ),
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.blue,
       ),
       body: Container(
         child: ListView(
@@ -149,6 +149,12 @@ class _AddPageState extends State<AddPage> {
               height: 20.0,
             ),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
               onPressed: () {
                 if (itemNameController.text.isEmpty ||
                     itemPriceController.text.isEmpty ||
@@ -164,7 +170,12 @@ class _AddPageState extends State<AddPage> {
                       itemNameController.text.trim(), price, stock);
                 }
               },
-              child: const Text('Add Item'),
+              child: const Text(
+                'Add Item',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
             ),
           ],
         ),

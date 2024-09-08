@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:myapp/addpage.dart';
+
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
 
@@ -43,6 +45,12 @@ class _HomepageState extends State<Homepage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          //material page route to add page
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => AddPage(),
+            ),
+          );
           print("tambah data");
         },
         backgroundColor: Colors.blue,
