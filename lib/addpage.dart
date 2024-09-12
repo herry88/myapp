@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:myapp/homepage.dart';
 
 class AddPage extends StatefulWidget {
   const AddPage({super.key});
@@ -13,7 +14,7 @@ class AddPage extends StatefulWidget {
 class _AddPageState extends State<AddPage> {
   //function add data
   Future<void> _addData(
-      String item_code, String item_name, int price, int stock) async {
+      String itemCode, String itemName, int price, int stock) async {
     String url = "https://adipramanacomputer.com/apiphp/add.php";
 
     try {
@@ -23,8 +24,8 @@ class _AddPageState extends State<AddPage> {
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode({
-          'item_code': item_code,
-          'item_name': item_name,
+          'item_code': itemCode,
+          'item_name': itemName,
           'price': price,
           'stock': stock,
         }),
@@ -72,7 +73,7 @@ class _AddPageState extends State<AddPage> {
             bottom: 12.0,
           ),
           children: [
-            Container(
+            SizedBox(
               height: 50.0,
               child: TextField(
                 controller: itemCodeController,
@@ -88,10 +89,10 @@ class _AddPageState extends State<AddPage> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20.0,
             ),
-            Container(
+            SizedBox(
               height: 50.0,
               child: TextField(
                 controller: itemNameController,
@@ -107,10 +108,10 @@ class _AddPageState extends State<AddPage> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20.0,
             ),
-            Container(
+            SizedBox(
               height: 50.0,
               child: TextField(
                 controller: itemPriceController,
@@ -126,10 +127,10 @@ class _AddPageState extends State<AddPage> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20.0,
             ),
-            Container(
+            SizedBox(
               height: 50.0,
               child: TextField(
                 controller: itemStockController,
@@ -145,7 +146,7 @@ class _AddPageState extends State<AddPage> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20.0,
             ),
             ElevatedButton(
@@ -168,6 +169,9 @@ class _AddPageState extends State<AddPage> {
 
                   _addData(itemCodeController.text.trim(),
                       itemNameController.text.trim(), price, stock);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const Homepage()),
+                  );
                 }
               },
               child: const Text(
