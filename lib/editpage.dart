@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 class EditPage extends StatefulWidget {
   List? list;
   int index;
-  EditPage({this.list, required this.index});
+  EditPage({super.key, this.list, required this.index});
 
   @override
   _EditPageState createState() => _EditPageState();
@@ -46,7 +46,7 @@ class _EditPageState extends State<EditPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('EditPage'),
+        title: const Text('EditPage'),
         automaticallyImplyLeading: false,
       ),
       body: Padding(
@@ -57,33 +57,33 @@ class _EditPageState extends State<EditPage> {
               children: [
                 TextField(
                   controller: controllerCode,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Item Code',
                     labelText: 'Item Code',
                   ),
                 ),
                 TextField(
                   controller: controllerName,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Item Name',
                     labelText: 'Item Name',
                   ),
                 ),
                 TextField(
                   controller: controllerPrice,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Price',
                     labelText: 'Price',
                   ),
                 ),
                 TextField(
                   controller: controllerStock,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Stock',
                     labelText: 'Stock',
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20.0,
                 ),
                 ElevatedButton(
@@ -95,7 +95,7 @@ class _EditPageState extends State<EditPage> {
                     //   ),
                     // );
                   },
-                  child: Text(
+                  child: const Text(
                     'Update Data',
                   ),
                 ),
