@@ -76,7 +76,7 @@ class _AddPageState extends State<AddPage> {
             SizedBox(
               height: 50.0,
               child: TextField(
-                controller: itemCodeController,
+                controller: itemCodeController, //name
                 keyboardType: TextInputType.text,
                 decoration: const InputDecoration(
                   labelText: 'Item Code',

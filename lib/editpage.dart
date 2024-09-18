@@ -1,7 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:myapp/homepage.dart';
 
-// ignore: must_be_immutable
 class EditPage extends StatefulWidget {
   List? list;
   int index;
@@ -17,36 +18,70 @@ class _EditPageState extends State<EditPage> {
   TextEditingController? controllerPrice;
   TextEditingController? controllerStock;
 
-  //function editData
-  void editData() {
-    var url = "http://192.168.100.109/backendflutter/editdata.php";
-    http.post(Uri.parse(url), body: {
-      "id": widget.list![widget.index]['id'],
-      "item_code": controllerCode!.text,
-      "item_name": controllerName!.text,
-      "price": controllerPrice!.text,
-      "stock": controllerStock!.text
-    });
+  Future<void> updateData(
+      int id, String itemcode, String itemname, double price, int stock) async {
+    final url = 'https://adipramanacomputer.com/apiphp/edit.php';
+    final response = await http.post(
+      Uri.parse(url),
+      body: {
+        'id': id.toString(),
+        'item_code': itemcode,
+        'item_name': itemname,
+        'price': price.toString(),
+        'stock': stock.toString(),
+      },
+    );
+
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      if (data['success'] != null) {
+        print('Success: ${data['success']}');
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => Homepage(),
+          ),
+        );
+      } else if (data['error'] != null) {
+        print('Error: ${data['error']}');
+      }
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+    }
+  }
+
+  @override
+  void dispose() {
+    controllerCode!.dispose();
+    controllerName!.dispose();
+    controllerPrice!.dispose();
+    controllerStock!.dispose();
+
+    super.dispose();
   }
 
   @override
   void initState() {
+    super.initState();
     controllerCode =
         TextEditingController(text: widget.list![widget.index]['item_code']);
     controllerName =
         TextEditingController(text: widget.list![widget.index]['item_name']);
-    controllerPrice =
-        TextEditingController(text: widget.list![widget.index]['price']);
-    controllerStock =
-        TextEditingController(text: widget.list![widget.index]['stock']);
-    super.initState();
+    controllerPrice = TextEditingController(
+        text: widget.list![widget.index]['price'].toString());
+    controllerStock = TextEditingController(
+        text: widget.list![widget.index]['stock'].toString());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('EditPage'),
+        title: const Text('Edit Page', style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.blue,
         automaticallyImplyLeading: false,
       ),
       body: Padding(
@@ -75,6 +110,7 @@ class _EditPageState extends State<EditPage> {
                     hintText: 'Price',
                     labelText: 'Price',
                   ),
+                  keyboardType: TextInputType.numberWithOptions(decimal: true),
                 ),
                 TextField(
                   controller: controllerStock,
@@ -82,25 +118,23 @@ class _EditPageState extends State<EditPage> {
                     hintText: 'Stock',
                     labelText: 'Stock',
                   ),
+                  keyboardType: TextInputType.number,
                 ),
-                const SizedBox(
-                  height: 20.0,
-                ),
+                const SizedBox(height: 20.0),
                 ElevatedButton(
                   onPressed: () {
-                    editData();
-                    // Navigator.of(context).push(
-                    //   MaterialPageRoute(
-                    //     builder: (context) => ViewData(),
-                    //   ),
-                    // );
+                    updateData(
+                      widget.list![widget.index]['id'],
+                      controllerCode!.text.trim(),
+                      controllerName!.text.trim(),
+                      double.parse(controllerPrice!.text.trim()),
+                      int.parse(controllerStock!.text.trim()),
+                    );
                   },
-                  child: const Text(
-                    'Update Data',
-                  ),
+                  child: const Text('Update Data'),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
