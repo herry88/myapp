@@ -6,7 +6,7 @@ import 'package:myapp/homepage.dart';
 class DetailPage extends StatefulWidget {
   List? list;
   int index;
-  DetailPage({this.list, required this.index});
+  DetailPage({super.key, this.list, required this.index});
 
   @override
   _DetailPageState createState() => _DetailPageState();
@@ -29,7 +29,7 @@ class _DetailPageState extends State<DetailPage> {
     AlertDialog alertDialog = AlertDialog(
       content: Text(
         'Are you Sure want to delete ${widget.list![widget.index]['item_name']} ?',
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -39,11 +39,11 @@ class _DetailPageState extends State<DetailPage> {
             deleteData();
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => Homepage(),
+                builder: (context) => const Homepage(),
               ),
             );
           },
-          child: Text(
+          child: const Text(
             'Ok Delete!',
             style: TextStyle(
               color: Colors.red,
@@ -57,7 +57,7 @@ class _DetailPageState extends State<DetailPage> {
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.teal,
           ),
-          child: Text(
+          child: const Text(
             'Cancel',
             style: TextStyle(
               color: Colors.white,
@@ -78,7 +78,7 @@ class _DetailPageState extends State<DetailPage> {
         centerTitle: true,
         title: Text(
           "${widget.list![widget.index]["item_name"]}",
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
           ),
         ),
@@ -100,38 +100,38 @@ class _DetailPageState extends State<DetailPage> {
           child: Center(
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(
+                const Padding(
+                  padding: EdgeInsets.only(
                     top: 15.0,
                   ),
                 ),
                 Text(
                   widget.list![widget.index]['item_name'],
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10.0,
                 ),
                 Text(
                   "Item Code : ${widget.list![widget.index]['item_code']}",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 20.0,
                   ),
                 ),
                 Text(
                   "Price : ${widget.list![widget.index]['price']}",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 20.0,
                   ),
                 ),
                 Text(
                   "Stock : ${widget.list![widget.index]['stock']}",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 20.0,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 30.0),
+                const Padding(
+                  padding: EdgeInsets.only(top: 30.0),
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.min,
@@ -148,7 +148,7 @@ class _DetailPageState extends State<DetailPage> {
                           ),
                         );
                       },
-                      child: Text(
+                      child: const Text(
                         'Edit',
                         style: TextStyle(
                           color: Colors.white,
@@ -156,7 +156,7 @@ class _DetailPageState extends State<DetailPage> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 20.0,
                     ),
                     ElevatedButton(
@@ -166,7 +166,7 @@ class _DetailPageState extends State<DetailPage> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.red,
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.delete,
                       ),
                     ),

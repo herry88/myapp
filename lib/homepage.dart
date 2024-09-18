@@ -22,7 +22,7 @@ class _HomepageState extends State<Homepage> {
     super.initState();
     _futureData = getData(); // Fetch data initially
 
-    _timer = Timer.periodic(Duration(seconds: 30), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 30), (timer) {
       setState(() {
         _futureData = getData(); // Refresh the data
       });
@@ -102,8 +102,7 @@ class ItemList extends StatelessWidget {
   final List? list;
   final VoidCallback onDelete;
 
-  const ItemList({Key? key, this.list, required this.onDelete})
-      : super(key: key);
+  const ItemList({super.key, this.list, required this.onDelete});
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +134,7 @@ class ItemList extends StatelessWidget {
                 title: Text(
                   list![i]['item_name'],
                 ),
-                leading: Icon(
+                leading: const Icon(
                   Icons.widgets,
                 ),
               ),
