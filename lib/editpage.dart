@@ -20,7 +20,7 @@ class _EditPageState extends State<EditPage> {
 
   Future<void> updateData(
       int id, String itemcode, String itemname, double price, int stock) async {
-    final url = 'https://adipramanacomputer.com/apiphp/edit.php';
+    const url = 'https://adipramanacomputer.com/apiphp/edit.php';
     final response = await http.post(
       Uri.parse(url),
       body: {
@@ -41,7 +41,7 @@ class _EditPageState extends State<EditPage> {
         print('Success: ${data['success']}');
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => Homepage(),
+            builder: (context) => const Homepage(),
           ),
         );
       } else if (data['error'] != null) {
@@ -110,7 +110,7 @@ class _EditPageState extends State<EditPage> {
                     hintText: 'Price',
                     labelText: 'Price',
                   ),
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 ),
                 TextField(
                   controller: controllerStock,
